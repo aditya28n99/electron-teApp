@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#topbar{
+    display: flex;
+    justify-content: center;
+
+}
+#title-head{
+    padding: 2px;
+    color: red;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#top-navbar{
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+.nav_btn{
+    padding: 0 5px;
+    margin: 5px;
+}

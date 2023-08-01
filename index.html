@@ -10,12 +10,25 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
-    <title>Hello from Electron renderer!</title>
+    <link rel="stylesheet" href="style.css">
+    <title>teApp</title>
   </head>
   <body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
-    <p id="info"></p>
+    <div id="topbar">
+      <h2 id="title-head">teApp</h2>
+    </div>
+    <div id="top-navbar">
+      <button class="nav_btn" name="close">Close</button>
+      <button class="nav_btn" name="settings">Settings</button>
+      <button class="nav_btn" name="language">Language</button>
+      <button class="nav_btn" name="help">Help</button>
+      <button class="nav_btn" name="tool">Tool</button>
+    </div> 
+    <div>
+      <button type="button" class="nav_btn" name="open folder" id="selectFileBtn">Open Directory</button>
+      <p id="filePath"></p>
+    </div>
+    
   </body>
   <script src="./renderer.js"></script>
 </html>
