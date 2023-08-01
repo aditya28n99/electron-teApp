@@ -1,6 +1,5 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron')
+const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron')
 const path = require('path');
-const chokidar = require('chokidar');
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -14,33 +13,16 @@ const createWindow = () => {
 
   win.loadFile('index.html');
 
-  ipcMain.on('startMonitoring', (event, folderPath) => {
-    if (!folderPath) {
-      dialog.showErrorBox('Error', 'No folder selected!');
-      return;
-    }
-  
-    // Start monitoring the folder using chokidar
-    const watcher = chokidar.watch(folderPath);
-  
-    // Event listeners for file changes
-    watcher.on('add', (filePath) => {
-      console.log(`File added: ${filePath}`);
-    });
-  
-    watcher.on('change', (filePath) => {
-      console.log(`File changed: ${filePath}`);
-    });
-  
-    watcher.on('unlink', (filePath) => {
-      console.log(`File removed: ${filePath}`);
-    });
-  
-    // Event listener for errors
-    watcher.on('error', (error) => {
-      console.error('Watcher error:', error);
-    });
+// The File configration starts -ipcMain -dialog
+ipcMain.handle('open-file-dialog', async () => {
+  const result = await dialog.showOpenDialog({
+    properties: ['openFile'],
   });
+
+  if (!result.canceled && result.filePaths.length > 0) {
+    return result.filePaths[0];
+  }
+});
 }
 
 app.whenReady().then(() => {

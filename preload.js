@@ -1,13 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-contextBridge.exposeInMainWorld('versions', {
-  node: () => process.versions.node,
-  chrome: () => process.versions.chrome,
-  electron: () => process.versions.electron
-})
-
-contextBridge.exposeInMainWorld('ipcRenderer', {
-  startMonitoring: (folderPath) => {
-    ipcRenderer.send('startMonitoring', folderPath);
-  },
-});
+// Expose 'require' to the renderer process
+contextBridge.exposeInMainWorld('require', require);
+contextBridge.exposeInMainWorld('ipcRenderer', ipcRenderer);
